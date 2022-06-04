@@ -1,5 +1,6 @@
-import { Component, OnInit, ViewChild, Output, ElementRef, EventEmitter } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Message } from '../message.model';
+import { MessageService } from '../message.service';
 
 @Component({
   selector: 'app-message-edit',
@@ -7,24 +8,25 @@ import { Message } from '../message.model';
   styleUrls: ['./message-edit.component.css']
 })
 export class MessageEditComponent implements OnInit {
-  @ViewChild('nameInput') subjectInputRef!: ElementRef;
-  @ViewChild('amountInput') msgTextInputRef!: ElementRef;
-  @Output() messageSent = new EventEmitter<Message>();
+  @ViewChild('subjectInput') subjectInputRef: ElementRef;
+  @ViewChild('msgTextInput') msgTextInputRef: ElementRef;
+  //@Output() messageSent = new EventEmitter<Message>();
 
-  constructor() { }
+  constructor(private messageService: MessageService) { }
 
-  ngOnInit(): void {
+  ngOnInit() {
   }
 
   onSendMessage() {
     const messSubject = this.subjectInputRef.nativeElement.value;
     const messMsgText = this.msgTextInputRef.nativeElement.value;
-    const newMessage = new Message("1",messSubject, messMsgText, "Dillon");
-    this.messageSent.emit(newMessage);
+    const newMessage = new Message("1", messSubject, messMsgText, "Dillon");
+    //this.messageService.addMessage(newMessage);
   }
 
   onClear() {
-
+    this.subjectInputRef.nativeElement.value = "";
+    this.msgTextInputRef.nativeElement.value = "";
   }
 
 }
