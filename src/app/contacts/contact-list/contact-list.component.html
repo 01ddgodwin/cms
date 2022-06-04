@@ -7,7 +7,9 @@
   <hr>
   <div class="row panel-body">
     <div class="col-xs-12">
-      <app-contact-item *ngFor="let contactEl of contacts" [contact]="contactEl"></app-contact-item>
+      <app-contact-item *ngFor="let contactEl of contacts; let i = index"
+      [contact]="contactEl"
+      [index]="i"></app-contact-item>
     </div>
   </div>
 </div>

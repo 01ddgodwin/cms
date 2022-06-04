@@ -9,15 +9,8 @@ import { ContactService } from '../../contact.service';
 })
 export class ContactItemComponent implements OnInit {
   @Input() contact!: Contact;
-  //@Output() contactSelected = new EventEmitter<void>();
-
-  constructor(private contactService: ContactService) { }
+  @Input() index: number;
 
   ngOnInit(): void {
   }
-
-  onSelected() {
-    this.contactService.contactSelected.emit(this.contact);
-  }
-
 }
