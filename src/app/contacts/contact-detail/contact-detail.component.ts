@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Params, Router } from '@angular/router';
+import { ActivatedRoute, Params, Route, Router } from '@angular/router';
 import { ContactService } from '../contact.service';
 import { Contact } from '../contact.model';
 
@@ -19,9 +19,7 @@ export class ContactDetailComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.route.params
-      .subscribe(
-        (params: Params) => {
+    this.route.params.subscribe((params: Params) => {
           this.id = params['id'];
           this.contact = this.contactService.getContact(this.id);
         }

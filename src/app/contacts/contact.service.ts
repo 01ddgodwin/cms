@@ -9,7 +9,7 @@ import { MOCKCONTACTS } from './MOCKCONTACTS';
 export class ContactService {
   private contacts: Contact[] = [];
   contactSelected = new EventEmitter<Contact>();
-  contactChangedEvent = new EventEmitter<Contact[]>();
+  //contactChangedEvent = new EventEmitter<Contact[]>();
   contactListChangedEvent = new Subject<Contact[]>();
   maxContactId: number;
 
@@ -19,7 +19,9 @@ export class ContactService {
   }
 
   getContacts(): Contact[] {
-    return this.contacts.slice();
+    return this.contacts
+      .sort((a, b) => (a.name > b.name ? 1 : b.name > a.name ? -1 : 0))
+      .slice();
   }
 
   getContact(id: string): Contact {
@@ -54,7 +56,7 @@ export class ContactService {
       }
     }
 
-    return maxId;
+    return maxId + 1;
   }
 
   addContact(newContact: Contact) {
