@@ -12,9 +12,10 @@ export class ContactListComponent implements OnInit, OnDestroy {
   //@Output() contactSelectedEvent = new EventEmitter<Contact>();
   contacts: Contact[] = [];
   subscription: Subscription;
+  term: string;
 
   constructor(private contactService: ContactService) {
-    this.contacts = this.contactService.getContacts();
+    // this.contacts = this.contactService.getContacts();
   }
 
   ngOnInit() {
@@ -29,7 +30,8 @@ export class ContactListComponent implements OnInit, OnDestroy {
     this.subscription.unsubscribe();
   }
 
-  // onSelected(contact: Contact) {
-  //   this.contactService.contactSelected.emit(contact);
-  // }
+  search(value: string) {
+    this.term = value;
+  }
+
 }
