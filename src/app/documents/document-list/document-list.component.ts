@@ -6,23 +6,25 @@ import { Document } from '../documents.model';
 @Component({
   selector: 'app-document-list',
   templateUrl: './document-list.component.html',
-  styleUrls: ['./document-list.component.css']
+  styleUrls: ['./document-list.component.css'],
 })
 export class DocumentListComponent implements OnInit, OnDestroy {
   documents: Document[] = [];
-  subscripton: Subscription;  
+  subscripton: Subscription;
 
-  constructor(private documentService: DocumentService) { }
+  constructor(private documentService: DocumentService) {
+    this.documentService.getDocuments();
+  }
 
   ngOnInit() {
-    this.subscripton = this.documentService.documentListChangedEvent.subscribe((documents: Document[]) => {
-      this.documents = documents;
-    });
-
+    this.subscripton = this.documentService.documentListChangedEvent.subscribe(
+      (documents: Document[]) => {
+        this.documents = documents;
+      }
+    );
   }
 
   ngOnDestroy(): void {
     this.subscripton.unsubscribe();
   }
-
 }

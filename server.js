@@ -4,6 +4,7 @@ var path = require('path');
 var http = require('http');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var mongoose = require('mongoose');
 
 // import the routing file to handle the default (index) route
 var index = require('./server/routes/app');
@@ -46,18 +47,29 @@ app.use(express.static(path.join(__dirname, 'dist/cms')));
 app.use('/', index);
 app.use('/messages', messageRoutes);
 app.use('/contacts', contactRoutes);
-app.use('/documents', documentRoutes);
+app.use('/documents', documentsRoutes);
 
 // Tell express to map all other non-defined routes back to the index page
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
-    res.render('index');
+app.use(function (req, res, next) {
+  res.render('index');
 })
 
 // Tell express to map all other non-defined routes back to the index page
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'dist/cms/index.html'));
 });
+
+// establish a connection to the mongo database
+mongoose.connect('mongodb://localhost:27017/cms', {
+  useNewUrlParser: true
+}, (err, res) => {
+  if (err) {
+    console.log('Connection failed: ' + err);
+  } else {
+    console.log("Connected to Database!");
+  }
+})
 
 // Define the port address and tell express to use this port
 const port = process.env.PORT || '3000';
@@ -67,6 +79,6 @@ app.set('port', port);
 const server = http.createServer(app);
 
 // Tell the server to start listening on the provided port
-server.listen(port, function() {
+server.listen(port, function () {
   console.log('API running on localhost: ' + port)
 });
