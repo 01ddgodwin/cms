@@ -1,6 +1,6 @@
 # Cms
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.3.4.
+This is a project that I did for my Full Stack Web Development class. It uses Angular and Node.JS to showcase different techniques.
 
 ## Development server
 
