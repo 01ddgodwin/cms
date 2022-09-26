@@ -1,6 +1,6 @@
 # Cms
 
-This is a project that I did for my Full Stack Web Development class. It uses Angular and Node.JS to showcase different techniques.
+This is a project I built in my Web Backend Development II class that we worked on all semester. The main focus is to learn the different types of things you can do with Angular and just trying to learn the basics. It might not look great but it's mostly about the functionality.
 
 ## Development server
 
